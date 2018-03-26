@@ -1,2 +1,2 @@
-# userParis2024
+# MyeventParis2024
 Application Android permétant l'accès a l'interface utilisateur du site Paris2024
