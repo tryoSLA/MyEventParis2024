@@ -31,9 +31,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private Button btConnecter, btAnnuler;
-    private EditText txtPseudo, txtMdp;
-    private TextView tvTitre;
-
+    private EditText txtEmail, txtMdp;
     private static Candidat leCandidat = null;
 
     @Override
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btAnnuler = (Button) findViewById(R.id.idAnnuler);
         this.btConnecter = (Button) findViewById(R.id.idConnecter);
         this.txtMdp = (EditText) findViewById(R.id.idMdp);
-        this.txtPseudo = (EditText) findViewById(R.id.idPseudo);
+        this.txtEmail = (EditText) findViewById(R.id.idEmail);
 
         this.btAnnuler.setOnClickListener(this);
         this.btConnecter.setOnClickListener(this);
@@ -58,17 +56,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.idAnnuler:
-                this.txtPseudo.setText("");
+                this.txtEmail.setText("");
                 this.txtMdp.setText("");
                 break;
 
             case R.id.idConnecter:
             {
                 //verification de la connexion via l'api php
-                String pseudo = this.txtPseudo.getText().toString();
+                String email = this.txtEmail.getText().toString();
                 String mdp = this.txtMdp.getText().toString();
 
-                final Candidat unCandidat = new Candidat(pseudo, "", mdp);
+                final Candidat unCandidat = new Candidat("", email, mdp);
 
                 //declare le this d'activity pour ne pas confondre avec le thread
                 final MainActivity ma = this;
@@ -85,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         uneConnexion.execute(unCandidat);
                                         //test de la verif de connexion
                                         //utilise une synchronisation du thread pf avec le pp
+                                        try{
+                                            Thread.sleep(1000);
+                                        }
+                                        catch(InterruptedException exp)
+                                        {
+                                            Log.e("Retard", "retard");
+                                        }
                                         runOnUiThread
                                                 (
                                                         new Runnable()
@@ -98,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                                 }
                                                                 else
                                                                 {
-                                                                    Toast.makeText(ma, "Bienvenue "+leCandidat.getEmail(), Toast.LENGTH_LONG).show();
-                                                                    Intent unIntent = new Intent(ma, MesEvenements.class);
+                                                                    Toast.makeText(ma, "Bienvenue "+leCandidat.getPseudo(), Toast.LENGTH_LONG).show();
+                                                                    Intent unIntent = new Intent(ma, Menu.class);
                                                                     unIntent.putExtra("email", leCandidat.getEmail());
                                                                     startActivity(unIntent);
                                                                 }
@@ -132,7 +137,7 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
     @Override
     protected Candidat doInBackground(Candidat... candidats)
     {
-        String url = "mettre l'url";
+        String url = "http://projet26.entreprise.lan/apiAndroidMyEvent/connexion_user.php";
         String resultat = null;
 
         Candidat unCandidat = candidats[0];
@@ -152,9 +157,9 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
             uneUrlConnexion.setConnectTimeout(15000);
             //on se connecte
             uneUrlConnexion.connect();
-
+            Log.e("connexion : ", "ok");
             //envoi des parametres
-            String  parametres = "pseudo="+unCandidat.getPseudo();
+            String  parametres = "email="+unCandidat.getEmail();
             parametres += "&mdp="+unCandidat.getMdp();
             //ecriture des parametres dans un fichier de sortie
             OutputStream fichier = uneUrlConnexion.getOutputStream();
@@ -188,6 +193,7 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
         catch (IOException exp)
         {
             Log.e("Erreur : ", "Connexion impossible a " + url);
+            exp.printStackTrace();
         }
 
         if (resultat != null)
@@ -203,7 +209,7 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
                             (
                                     unCandidat.getPseudo(),
                                     unCandidat.getMdp(),
-                                    unObjet.getString("email")
+                                    unCandidat.getEmail()
                             );
                 }
             }
