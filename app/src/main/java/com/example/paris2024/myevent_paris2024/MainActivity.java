@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                                 else
                                                                 {
                                                                     Toast.makeText(ma, "Bienvenue "+leCandidat.getPseudo(), Toast.LENGTH_LONG).show();
-                                                                    Intent unIntent = new Intent(ma, MesEvenements.class);
+                                                                    Intent unIntent = new Intent(ma, Menu.class);
                                                                     unIntent.putExtra("email", leCandidat.getEmail());
                                                                     startActivity(unIntent);
                                                                 }
