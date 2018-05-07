@@ -4,42 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MesEvenements">
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginRight="52dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="7dp"
-        android:text="Mes évènements"
-        android:textColor="#EE334E"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <Button
-        android:id="@+id/idVoirLesEvenements"
-        android:layout_width="276dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="11dp"
-        android:background="#ee334e"
-        android:backgroundTint="#EE334E"
-        android:text="Voir les evenements"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idListeEvents" />
+    tools:context=".Evenements">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageView3"
         android:layout_width="303dp"
         android:layout_height="146dp"
         android:layout_marginTop="16dp"
@@ -49,16 +17,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/jo" />
 
+    <Button
+        android:id="@+id/idVoirMesEvenements"
+        android:layout_width="276dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="11dp"
+        android:background="#ee334e"
+        android:backgroundTint="#EE334E"
+        android:text="Voir mes evenements"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idListeEvents" />
+
     <ListView
-        android:id="@+id/idListe"
+        android:id="@+id/idListeEvents"
         android:layout_width="368dp"
-        android:layout_height="254dp"
+        android:layout_height="260dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="7dp"
+        android:text="Tout les évènements"
+        android:textColor="#EE334E"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 </android.support.constraint.ConstraintLayout>

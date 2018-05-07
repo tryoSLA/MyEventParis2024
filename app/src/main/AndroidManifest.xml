@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MesEvenements" />
-        <activity android:name=".Menu"></activity>
+        <activity android:name=".Menu" />
+        <activity android:name=".Evenements"></activity>
     </application>
 
 </manifest>

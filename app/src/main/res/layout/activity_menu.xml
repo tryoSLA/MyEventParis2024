@@ -18,27 +18,33 @@
         app:srcCompat="@drawable/jo" />
 
     <Button
-        android:id="@+id/IdEvenements"
+        android:id="@+id/idEvenements"
         android:layout_width="276dp"
         android:layout_height="68dp"
         android:layout_marginTop="84dp"
         android:text="Evenements"
+        android:background="#ee334e"
+        android:backgroundTint="#EE334E"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/IdMesEvenements"
+        android:id="@+id/idMesEvenements"
         android:layout_width="276dp"
         android:layout_height="69dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="Mes Evenements"
+        android:background="#ee334e"
+        android:backgroundTint="#EE334E"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/IdEvenements"
+        app:layout_constraintTop_toBottomOf="@+id/idEvenements"
         app:layout_constraintVertical_bias="0.3" />
 </android.support.constraint.ConstraintLayout>

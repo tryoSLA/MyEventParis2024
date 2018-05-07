@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                                     Toast.makeText(ma, "Bienvenue "+leCandidat.getPseudo(), Toast.LENGTH_LONG).show();
                                                                     Intent unIntent = new Intent(ma, Menu.class);
                                                                     unIntent.putExtra("email", leCandidat.getEmail());
+                                                                    unIntent.putExtra("id_user", leCandidat.getIdCandidat()+"");
+                                                                    //id_user remplace id_personne
                                                                     startActivity(unIntent);
                                                                 }
                                                             }
@@ -119,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             break;
         }
+
+
     }
 
     public static Candidat getLeCandidat() {
@@ -137,7 +141,7 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
     @Override
     protected Candidat doInBackground(Candidat... candidats)
     {
-        String url = "http://projet26.entreprise.lan/apiAndroidMyEvent/connexion_user.php";
+        String url = "http://projet13.entreprise.lan/apiAndroidMyEvent/connexion_user.php";
         String resultat = null;
 
         Candidat unCandidat = candidats[0];
@@ -207,7 +211,8 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
                 {
                     candidatConnecte = new Candidat
                             (
-                                    unCandidat.getPseudo(),
+                                   unObjet.getInt("id_personne"),
+                                    unObjet.getString("pseudo"),
                                     unCandidat.getMdp(),
                                     unCandidat.getEmail()
                             );
