@@ -151,7 +151,7 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
         @Override
         protected ArrayList<String> doInBackground(String... strings)
         {
-            String url = "http://projet13.entreprise.lan/apiAndroidMyEvent/voir_mes_evenement.php";
+            String url = "http://192.168.171.177/eco/apiAndroidMyEvent/voir_mes_evenement.php";
             String resultat = null;
 
             String unId_user = strings[0];

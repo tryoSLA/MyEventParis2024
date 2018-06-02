@@ -26,12 +26,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Evenements extends AppCompatActivity implements View.OnClickListener{
+public class Evenements extends AppCompatActivity implements View.OnClickListener {
 
     private String email;
     private String id_user;
-    private static ArrayList<String> lesEvenements ;
-    private ListView lvEvenements ;
+    private static ArrayList<String> lesEvenements;
+    private ListView lvEvenements;
     private Button btVoirMesEvents;
 
     @Override
@@ -46,43 +46,34 @@ public class Evenements extends AppCompatActivity implements View.OnClickListene
 
         this.btVoirMesEvents.setOnClickListener(this);
 
-        Toast.makeText(this, email+"  "+id_user, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, email + "  " + id_user, Toast.LENGTH_SHORT).show();
 
         //declare le this d'activity pour ne pas confondre avec le thread
         final Evenements me = this;
         //execution de la class Asynchrone
         Thread unT = new Thread
                 (
-                        new Runnable()
-                        {
+                        new Runnable() {
                             @Override
-                            public void run()
-                            {
+                            public void run() {
                                 //instanciation de la tache Asynchrone
                                 ExtractionEvents uneExtraction = new ExtractionEvents();
                                 uneExtraction.execute();
 
                                 //utilise une synchronisation du thread pf avec le pp
-                                try{
+                                try {
                                     Thread.sleep(1000);
-                                }
-                                catch(InterruptedException exp)
-                                {
+                                } catch (InterruptedException exp) {
                                     Log.e("Retard", "retard");
                                 }
                                 runOnUiThread
                                         (
-                                                new Runnable()
-                                                {
+                                                new Runnable() {
                                                     @Override
-                                                    public void run()
-                                                    {
-                                                        if (lesEvenements == null)
-                                                        {
+                                                    public void run() {
+                                                        if (lesEvenements == null) {
                                                             Toast.makeText(me, "Vous n'avez aucun evenement", Toast.LENGTH_LONG).show();
-                                                        }
-                                                        else
-                                                        {
+                                                        } else {
                                                             ArrayAdapter unAdapter = new ArrayAdapter(me, android.R.layout.simple_list_item_1, lesEvenements);
                                                             lvEvenements.setAdapter(unAdapter);
                                                         }
@@ -116,23 +107,19 @@ public class Evenements extends AppCompatActivity implements View.OnClickListene
 }
 
 
-
 /**********************************Classe Asynchrone Task**************************************************/
-class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>>
-{
+class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
-    protected ArrayList<String> doInBackground(Void... strings)
-    {
-        String url = "http://projet13.entreprise.lan/apiAndroidMyEvent/liste_evenement.php";
+    protected ArrayList<String> doInBackground(Void... strings) {
+        String url = "http://192.168.171.177/eco/apiAndroidMyEvent/liste_evenement.php";
         String resultat = null;
 
 
         ArrayList<String> uneListe = new ArrayList<String>();
 
-        try
-        {
+        try {
             URL uneUrl = new URL(url);
-            HttpURLConnection uneUrlConnexion = (HttpURLConnection)uneUrl.openConnection();
+            HttpURLConnection uneUrlConnexion = (HttpURLConnection) uneUrl.openConnection();
             //on fixela methode get
             uneUrlConnexion.setRequestMethod("GET");
             //on ouvre l'envoi et la reception des donnees
@@ -161,10 +148,9 @@ class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>>
             InputStream fichier2 = uneUrlConnexion.getInputStream();
             BufferedReader unBuffer2 = new BufferedReader(new InputStreamReader(fichier2, "UTF-8"));
             //on defini une chaine dynamique qui lit les chaines Json du fichier
-            StringBuilder sb  = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             String ligne = null;
-            while ((ligne = unBuffer2.readLine()) != null)
-            {
+            while ((ligne = unBuffer2.readLine()) != null) {
                 sb.append(ligne);
             }
             //on ferme les buffer et fichier et on affiche resultat
@@ -172,38 +158,32 @@ class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>>
             fichier2.close();
             resultat = sb.toString();
             Log.e("Resultat : ", resultat);
-        }
-        catch (IOException exp)
-        {
+        } catch (IOException exp) {
             Log.e("Erreur : ", "Connexion impossible a " + url);
             exp.printStackTrace();
         }
 
-        if (resultat != null)
-        {
-            try
-            {
+        if (resultat != null) {
+            try {
                 JSONArray tabJson = new JSONArray(resultat);
-                String chaine ="";
-                for (int i = 0; i <tabJson.length(); i++)
-                {
+                String chaine = "";
+                for (int i = 0; i < tabJson.length(); i++) {
                     JSONObject unObjet = tabJson.getJSONObject(i);
-                    chaine =unObjet.getString("Titre_event")+"  "+ unObjet.getString("libelle_ville");
+                    chaine = unObjet.getString("Titre_event") + "\n"
+                            + unObjet.getString("Date_evenement") + "\n\n" +
+                            unObjet.getString("Description_event");
                     uneListe.add(chaine);
                 }
 
-            }
-            catch (JSONException exp)
-            {
-                Log.e("Erreur : ", "Impossible de parser : "+resultat);
+            } catch (JSONException exp) {
+                Log.e("Erreur : \n\t", "\n\t" + exp + "\n\t Impossible de parser : \n\t" + resultat);
             }
         }
         return uneListe;
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> uneListe)
-    {
+    protected void onPostExecute(ArrayList<String> uneListe) {
         Evenements.setLesEvenements(uneListe);
     }
 }
