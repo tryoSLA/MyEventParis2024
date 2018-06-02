@@ -130,9 +130,9 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
         unIntent.putExtra("id_user", this.id_user);
         startActivity(unIntent);
 
-        int position=(Integer)v.getTag();
+        //int position=(Integer)v.getTag();
 
-        System.out.println(position);
+        //System.out.println(position);
     }
 
 
