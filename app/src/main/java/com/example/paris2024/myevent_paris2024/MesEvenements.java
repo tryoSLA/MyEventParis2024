@@ -219,14 +219,16 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
                     for (int i = 0; i <tabJson.length(); i++)
                         {
                             JSONObject unObjet = tabJson.getJSONObject(i);
-                            chaine =unObjet.getString("Titre_event")+"  "+ unObjet.getString("Libelle_ville");
+                            chaine =unObjet.getString("Titre_event")+"\n"
+                                    + unObjet.getString("Date_evenement")+"\n\n"+
+                                    unObjet.getString("Description_event");
                             uneListe.add(chaine);
                         }
 
                 }
                 catch (JSONException exp)
                 {
-                    Log.e("Erreur : ", "Impossible de parser : "+resultat);
+                    Log.e("Erreur : ", "\n"+exp+"\n Impossible de parser : \n\t"+resultat);
                 }
             }
             return uneListe;

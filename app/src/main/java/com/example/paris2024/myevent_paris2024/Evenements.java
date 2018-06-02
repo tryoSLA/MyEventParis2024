@@ -170,8 +170,7 @@ class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>> {
                 for (int i = 0; i < tabJson.length(); i++) {
                     JSONObject unObjet = tabJson.getJSONObject(i);
                     chaine = unObjet.getString("Titre_event") + "\n"
-                            + unObjet.getString("Date_evenement") + "\n\n" +
-                            unObjet.getString("Description_event");
+                            + unObjet.getString("Date_evenement");
                     uneListe.add(chaine);
                 }
 
