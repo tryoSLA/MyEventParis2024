@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".MesEvenements" />
         <activity android:name=".Menu" />
-        <activity android:name=".Evenements"></activity>
+        <activity android:name=".Evenements" />
+        <activity android:name=".un_evenement"></activity>
     </application>
 
 </manifest>

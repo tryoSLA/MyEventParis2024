@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -98,20 +99,30 @@ public class Evenements extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        Intent unIntent = null;
-        unIntent = new Intent(this, MesEvenements.class);
-        unIntent.putExtra("email", this.email);
-        unIntent.putExtra("id_user", this.id_user);
-        startActivity(unIntent);
+        lvEvenements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("pos = " + i);
+                String data=(String)adapterView.getItemAtPosition(i);
+                //System.out.println("data : "+data);
+                data = data.substring(0, 2);
+                System.out.println("data : "+data);
+                Intent unIntent = null;
+                unIntent = new Intent(getApplicationContext(), un_evenement.class);
+                unIntent.putExtra("email", email);
+                unIntent.putExtra("id_user", id_user);
+                unIntent.putExtra("id_event", data);
+                startActivity(unIntent);
+            }
+        });
     }
-}
 
 
 /**********************************Classe Asynchrone Task**************************************************/
 class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
     protected ArrayList<String> doInBackground(Void... strings) {
-        String url = "http://192.168.171.177/eco/apiAndroidMyEvent/liste_evenement.php";
+        String url = "http://192.168.0.23/apiAndroidMyEvent/liste_evenement.php";
         String resultat = null;
 
 
@@ -169,7 +180,8 @@ class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>> {
                 String chaine = "";
                 for (int i = 0; i < tabJson.length(); i++) {
                     JSONObject unObjet = tabJson.getJSONObject(i);
-                    chaine = unObjet.getString("Titre_event") + "\n"
+                    chaine = unObjet.getString("id_event") + "\n"
+                            + unObjet.getString("Titre_event") + "\n"
                             + unObjet.getString("Date_evenement");
                     uneListe.add(chaine);
                 }
@@ -185,6 +197,7 @@ class ExtractionEvents extends AsyncTask<Void, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> uneListe) {
         Evenements.setLesEvenements(uneListe);
     }
+}
 }
 
 

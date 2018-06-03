@@ -151,7 +151,7 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
         @Override
         protected ArrayList<String> doInBackground(String... strings)
         {
-            String url = "http://192.168.171.177/eco/apiAndroidMyEvent/voir_mes_evenement.php";
+            String url = "http://192.168.0.23/apiAndroidMyEvent/voir_mes_evenement.php";
             String resultat = null;
 
             String unId_user = strings[0];
@@ -220,8 +220,8 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
                         {
                             JSONObject unObjet = tabJson.getJSONObject(i);
                             chaine =unObjet.getString("Titre_event")+"\n"
-                                    + unObjet.getString("Date_evenement")+"\n\n"+
-                                    unObjet.getString("Description_event");
+                                    + unObjet.getString("Date_evenement");//+"\n\n"+
+                                    //unObjet.getString("Description_event");
                             uneListe.add(chaine);
                         }
 

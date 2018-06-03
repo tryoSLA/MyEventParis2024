@@ -141,7 +141,7 @@ class Conn extends AsyncTask<Candidat, Void, Candidat>
     @Override
     protected Candidat doInBackground(Candidat... candidats)
     {
-        String url = "http://192.168.171.177/eco/apiAndroidMyEvent/connexion_user.php";
+        String url = "http://192.168.0.23/apiAndroidMyEvent/connexion_user.php";
         String resultat = null;
 
         Candidat unCandidat = candidats[0];
