@@ -56,21 +56,6 @@ public class MesEvenements extends AppCompatActivity implements View.OnClickList
                 System.out.println("nom  "+selectedItem+ "  Id :   "+i);
             }
         });
-//        this.lvEvenements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<String> adapterView, View view, int i, long l) {
-//
-//                item = lvEvenements.getCheckedItemPosition();
-//
-//                Toast.makeText(this,item,Toast.LENGTH_SHORT).show();
-//                Toast.makeText(this, email + "  " +id_user, Toast.LENGTH_SHORT).show();
-//
-//                // item = adapter.getItemAtPosition(position);
-//
-//                //Intent unIntent = new Intent(this, unEvenement.class);
-//                //startActivity(unIntent);
-//            }
-//        });
 
         Toast.makeText(this, email + "  " +id_user, Toast.LENGTH_SHORT).show();
 
